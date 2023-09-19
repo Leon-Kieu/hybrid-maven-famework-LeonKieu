@@ -14,7 +14,7 @@ public class UserCustomerInfoPageObject extends BasePage {
 	}
 
 	public UserAddressesPageObject clickAddressesLink() {
-		waitForElementClickable(driver, CustomerInfoPageUI.ADDRESSES_LINK);
+		waitForElementVisible(driver, CustomerInfoPageUI.ADDRESSES_LINK);
 		clickToElement(driver, CustomerInfoPageUI.ADDRESSES_LINK);
 		return PageGeneratorManager.getUserAddressesPage(driver);
 	}

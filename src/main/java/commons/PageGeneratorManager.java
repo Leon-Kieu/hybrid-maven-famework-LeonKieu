@@ -3,6 +3,7 @@ package commons;
 import org.openqa.selenium.WebDriver;
 
 import pageObject.nopcommerce.user.UserAddressesPageObject;
+import pageObject.nopcommerce.user.UserChangePasswordPageObject;
 import pageObject.nopcommerce.user.UserCustomerInfoPageObject;
 import pageObject.nopcommerce.user.UserHomePageObject;
 import pageObject.nopcommerce.user.UserLoginPageObject;
@@ -32,4 +33,9 @@ public class PageGeneratorManager {
 	public static UserAddressesPageObject getUserAddressesPage(WebDriver driver) {
 		return new UserAddressesPageObject(driver);
 	}
+
+	public static UserChangePasswordPageObject getUserChangePasswordPage(WebDriver driver) {
+		return new UserChangePasswordPageObject(driver);
+	}
+
 }

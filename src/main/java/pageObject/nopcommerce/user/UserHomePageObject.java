@@ -37,4 +37,5 @@ public class UserHomePageObject extends BasePage {
 		return PageGeneratorManager.getUserCustomerInfoPage(driver);
 	}
 	
+
 }

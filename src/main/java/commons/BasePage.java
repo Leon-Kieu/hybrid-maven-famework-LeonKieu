@@ -20,8 +20,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObject.nopcommerce.user.UserAddressesPageObject;
+import pageObject.nopcommerce.user.UserChangePasswordPageObject;
+import pageUI.nopcommerce.user.AddressesPageUI;
 import pageUI.nopcommerce.user.BasePageUserUI;
-import pageUI.nopcommerce.user.RegisterPageUserUI;
+import pageUI.nopcommerce.user.CustomerInfoPageUI;
+
 
 
 
@@ -206,6 +210,11 @@ public class BasePage {
 	//Hàm lấy ra default dropdown đã chọn
 	protected String getSelectedItemDefaultDropdown(WebDriver driver, String locatorType) {
 		Select select = new Select(getWebElement(driver, locatorType));
+		return select.getFirstSelectedOption().getText();
+	}
+	
+	protected String getSelectedItemDefaultDropdown(WebDriver driver, String locatorType, String... dynamicValues) {
+		Select select = new Select(getWebElement(driver, getDynamicXpath(locatorType, dynamicValues)));
 		return select.getFirstSelectedOption().getText();
 	}
 	
@@ -569,10 +578,17 @@ public class BasePage {
 		return getElementText(driver, BasePageUserUI.DYNAMIC_TEXTBOX_BY_ID, textBoxID);
 	}
 	
-	//Ham Dynamic getText Dropdown By Name
-	public String getTextDropdownByName(WebDriver driver, String DropdownName) {
+	//Ham Dynamic getElementAttribute Text box by ID
+	public String getElementAttributeByID(WebDriver driver,String AttributeName, String textBoxID) {
+		waitForAllElementVisible(driver, BasePageUserUI.DYNAMIC_TEXTBOX_BY_ID, textBoxID);
+		return getElementAttribute(driver, BasePageUserUI.DYNAMIC_TEXTBOX_BY_ID, AttributeName ,textBoxID);
+	}
+	
+	
+	//Ham Dynamic getSelected Dropdown By Name
+	public String getSelectedDropdownByName(WebDriver driver, String DropdownName) {
 		waitForElementClickable(driver, BasePageUserUI.DYNAMMIC_DROPDOW_BY_NAME, DropdownName);
-		return getElementText(driver, BasePageUserUI.DYNAMMIC_DROPDOW_BY_NAME, DropdownName);
+		return getSelectedItemDefaultDropdown(driver, BasePageUserUI.DYNAMMIC_DROPDOW_BY_NAME, DropdownName);
 	}
 	
 	//Ham Dynamic check Selected Radio By ID
@@ -581,6 +597,8 @@ public class BasePage {
 		waitForElementVisible(driver,BasePageUserUI.DYNAMIC_RADIO_CHECKBOX_BY_ID, RadioID);
 		return isElementSelected(driver,BasePageUserUI.DYNAMIC_RADIO_CHECKBOX_BY_ID, RadioID);
 	}
+	
+
 	
 	
 	

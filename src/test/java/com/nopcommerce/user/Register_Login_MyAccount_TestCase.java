@@ -18,6 +18,7 @@ import commons.BasePage;
 import commons.BaseTest;
 import commons.PageGeneratorManager;
 import pageObject.nopcommerce.user.UserAddressesPageObject;
+import pageObject.nopcommerce.user.UserChangePasswordPageObject;
 import pageObject.nopcommerce.user.UserCustomerInfoPageObject;
 import pageObject.nopcommerce.user.UserHomePageObject;
 import pageObject.nopcommerce.user.UserLoginPageObject;
@@ -30,23 +31,25 @@ public class Register_Login_MyAccount_TestCase extends BaseTest {
 	private WebDriver driver;
 	Environment environment;
 	private String emailAddress, invalidEmail, firstName, lastName, password,invalidPass, day, month, year, company;
-
+	private String firstName_address, lastName_address, email_addres, company_address, country_address, city_address, address1, zipPostcode, phone;
+	private String password_new_change, confirm_password_new_change;
 	// Khai bao trang
 	private UserHomePageObject homePage;
 	private UserRegisterPageObject registerPage;
 	private UserLoginPageObject loginPage;
 	private UserCustomerInfoPageObject customerInfoPage;
 	private UserAddressesPageObject addressesPageObject;
-
+	private UserChangePasswordPageObject changePasswordPage;
+	
+	
 	@Parameters({ "browser", "environment" })
 	@BeforeClass
 	public void beforeClass(String browserName, String environmentName) {
 		ConfigFactory.setProperty("env", environmentName);
 		environment = ConfigFactory.create(Environment.class);
 		driver = getBrowserDriver(browserName, environment.appUrl());
-
 		homePage = PageGeneratorManager.getUserHomePage(driver);
-
+		//Register data
 		firstName = UserData.Register.FIRST_NAME;
 		lastName = UserData.Register.LAST_NAME;
 		emailAddress = UserData.Register.EMAIL + generateFakeNumber() + "@gmail.vn";
@@ -57,6 +60,20 @@ public class Register_Login_MyAccount_TestCase extends BaseTest {
 		month = UserData.Register.MONTH;
 		year = UserData.Register.YEAR;
 		company = UserData.Register.COMPANY;
+		
+		//Address data
+		firstName_address = UserData.Address.FIRST_NAME_ADDRESS;
+		lastName_address = UserData.Address.LAST_NAME_ADDRESS;
+		email_addres = UserData.Address.EMAIL_ADDRESS;
+		company_address = UserData.Address.COMPANY_ADDRESS;
+		country_address = UserData.Address.COUNTRY_ADDRESS;
+		city_address = UserData.Address.CITY_ADDRESS;
+		address1 = UserData.Address.ADDRESS1;
+		zipPostcode = UserData.Address.ZIP_POSTAL_CODE;
+		phone = UserData.Address.PHONE_NUMBER;
+		//Change pass
+		password_new_change = UserData.ChangePass.NEW_PASSWORD;
+		confirm_password_new_change = UserData.ChangePass.CONFIRM_NEW_PASSWORD;
 	}
 
 	@Test
@@ -325,27 +342,87 @@ public class Register_Login_MyAccount_TestCase extends BaseTest {
 		customerInfoPage.selectDropdownByName(driver, "DateOfBirthDay", "1");
 		ExtentTestManager.getTest().log(Status.INFO, "CustomerInfo 06: Update Company");
 		customerInfoPage.inputToTextboxByID(driver, "Company", "AnhIT");
-		ExtentTestManager.getTest().log(Status.INFO, "CustomerInfo 07: Verify Information Customer Info");
+		ExtentTestManager.getTest().log(Status.INFO, "CustomerInfo 07: Update Company");
+		customerInfoPage.clickToButtonByID(driver, "save-info-button");
+		ExtentTestManager.getTest().log(Status.INFO, "CustomerInfo 08: Verify Information Customer Info");
 		Assert.assertTrue(customerInfoPage.isSelectedRadioCheckBoxByID(driver, "gender-female"));
-		Assert.assertEquals(customerInfoPage.getTextTextboxByID(driver, "FirstName"), "Anh01");
-		Assert.assertEquals(customerInfoPage.getTextTextboxByID(driver, "LastName"), "IT01");
-		Assert.assertEquals(customerInfoPage.getTextDropdownByName(driver, "DateOfBirthDay"), "1");
-		Assert.assertEquals(customerInfoPage.getTextTextboxByID(driver, "Company"), "AnhIT");
+		Assert.assertEquals(customerInfoPage.getElementAttributeByID(driver,"value", "FirstName"), "Anh01");
+		Assert.assertEquals(customerInfoPage.getElementAttributeByID(driver,"value","LastName"), "IT01");
+		Assert.assertEquals(customerInfoPage.getSelectedDropdownByName(driver, "DateOfBirthDay"), "1");
+		Assert.assertEquals(customerInfoPage.getElementAttributeByID(driver,"value", "Company"), "AnhIT");
 		
 	}
 	
 	@Test
 	public void TC14_Addresses(Method method) {
 		ExtentTestManager.startTest(method.getName(), "TC14_Addresses");
-		ExtentTestManager.getTest().log(Status.INFO, "CustomerInfo 01: Open My account -Address");
+		ExtentTestManager.getTest().log(Status.INFO, "Address 01: Open My account -Address");
 		addressesPageObject = customerInfoPage.clickAddressesLink();
-		ExtentTestManager.getTest().log(Status.INFO, "CustomerInfo 02: Click Button Add New Address");
+		ExtentTestManager.getTest().log(Status.INFO, "Address 02: Click Button Add New Address");
 		addressesPageObject.clickButtonAddNew();
-		
+		ExtentTestManager.getTest().log(Status.INFO, "Address 03: Input FirstName New Address");
+		addressesPageObject.inputToTextboxByID(driver, "Address_FirstName", firstName_address);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 04: Input LastName New Address");
+		addressesPageObject.inputToTextboxByID(driver, "Address_LastName", lastName_address);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 05: Input Email New Address");
+		addressesPageObject.inputToTextboxByID(driver, "Address_Email", email_addres);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 06: Input Company New Address");
+		addressesPageObject.inputToTextboxByID(driver, "Address_Company", company_address);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 07: Select Country New Address");
+		addressesPageObject.selectDropdownByName(driver, "Address.CountryId", country_address);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 08: Input City New Address");
+		addressesPageObject.inputToTextboxByID(driver, "Address_City", city_address);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 09: Input Address1 New Address");
+		addressesPageObject.inputToTextboxByID(driver, "Address_Address1", address1);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 10: Input Zip Postcode New Address");
+		addressesPageObject.inputToTextboxByID(driver, "Address_ZipPostalCode", zipPostcode);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 11: Input Phone Number New Address");
+		addressesPageObject.inputToTextboxByID(driver, "Address_PhoneNumber", phone);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 12: Click Save Button");
+		addressesPageObject.clickButtonSaveAddress();
+		ExtentTestManager.getTest().log(Status.INFO, "Address 13: Verify Title New Address");
+		Assert.assertEquals(addressesPageObject.getTextTitleAddress(), firstName_address +" "+lastName_address);
+		ExtentTestManager.getTest().log(Status.INFO, "Address 14: Verify Information New Address");
+		Assert.assertEquals(addressesPageObject.getTextInfoAddressByClass("name"),firstName_address +" "+lastName_address);
+		Assert.assertEquals(addressesPageObject.getTextInfoAddressByClass("email").substring(7),email_addres);
+		Assert.assertEquals(addressesPageObject.getTextInfoAddressByClass("phone").substring(14), phone);
+		Assert.assertEquals(addressesPageObject.getTextInfoAddressByClass("company"), company_address);
+		Assert.assertEquals(addressesPageObject.getTextInfoAddressByClass("address1"), address1);
+		Assert.assertEquals(addressesPageObject.getTextInfoAddressByClass("city-state-zip"), city_address+", "+zipPostcode);
+		Assert.assertEquals(addressesPageObject.getTextInfoAddressByClass("country"), country_address);
 	}
 	
 	@Test
-	public void TC15_(Method method) {
+	public void TC15_Change_PassWord(Method method) {
+		ExtentTestManager.startTest(method.getName(), "TC15_Change_PassWord");
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 01: Open My account - Change Password");
+		changePasswordPage = addressesPageObject.clickChangePasswordLink();
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 02: Input current Password");
+		changePasswordPage.inputToTextboxByID(driver, "OldPassword", password);
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 03: Input New Password");
+		changePasswordPage.inputToTextboxByID(driver, "NewPassword", password_new_change);
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 04: Input Confirm New Password");
+		changePasswordPage.inputToTextboxByID(driver, "ConfirmNewPassword", confirm_password_new_change);
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 05: Click Change Password Button");
+		changePasswordPage.clickChangePasswordButton();
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 06: Click Logout Button");
+		homePage = changePasswordPage.clickLogoutLink();
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 07: Click Login Link");
+		loginPage = homePage.clickToLoginLink();
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 08: Input Email");
+		loginPage.inputToTextboxByID(driver, "Email", emailAddress);
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 09: Input Current Password");
+		loginPage.inputToTextboxByID(driver, "Password", password);
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 10: Click Login button");
+		loginPage.clickToLoginButton();
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 11: Verify error message");
+		Assert.assertEquals(loginPage.getErrorMessageLogin(), "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 12: Input New Password");
+		loginPage.inputToTextboxByID(driver, "Password", password_new_change);
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 13: Click Login button");
+		loginPage.clickToLoginButton();
+		ExtentTestManager.getTest().log(Status.INFO, "Change PassWord 14: Verify Login Success");
+		Assert.assertTrue(homePage.isMyAcountLinkDisplay());
 		
 	}
 	
