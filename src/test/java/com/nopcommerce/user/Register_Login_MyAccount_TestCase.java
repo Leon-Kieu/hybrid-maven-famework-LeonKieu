@@ -22,6 +22,10 @@ import pageObject.nopcommerce.user.UserChangePasswordPageObject;
 import pageObject.nopcommerce.user.UserCustomerInfoPageObject;
 import pageObject.nopcommerce.user.UserHomePageObject;
 import pageObject.nopcommerce.user.UserLoginPageObject;
+import pageObject.nopcommerce.user.UserMyproductReviewPageObject;
+import pageObject.nopcommerce.user.UserProductDetailPageObject;
+import pageObject.nopcommerce.user.UserProductPageObject;
+import pageObject.nopcommerce.user.UserProductReviewPageObject;
 import pageObject.nopcommerce.user.UserRegisterPageObject;
 import reportConfig.ExtentTestManager;
 import utilities.Environment;
@@ -40,7 +44,10 @@ public class Register_Login_MyAccount_TestCase extends BaseTest {
 	private UserCustomerInfoPageObject customerInfoPage;
 	private UserAddressesPageObject addressesPageObject;
 	private UserChangePasswordPageObject changePasswordPage;
-	
+	private UserMyproductReviewPageObject myProductReviewPage;
+	private UserProductPageObject productPage;
+	private UserProductDetailPageObject productDetailPage;
+	private UserProductReviewPageObject productReviewPage;
 	
 	@Parameters({ "browser", "environment" })
 	@BeforeClass
@@ -331,7 +338,7 @@ public class Register_Login_MyAccount_TestCase extends BaseTest {
 	public void TC13_Customer_Info(Method method) {
 		ExtentTestManager.startTest(method.getName(), "TC13_Customer_Info");
 		ExtentTestManager.getTest().log(Status.INFO, "CustomerInfo 01: Open My account -Customer info");
-		customerInfoPage = homePage.clickMyAccountLink();
+		customerInfoPage = homePage.clickMyAccountLink(driver);
 		ExtentTestManager.getTest().log(Status.INFO, "CustomerInfo 02: Update Gender");
 		customerInfoPage.checkToRadioCheckBoxById(driver, "gender-female");
 		ExtentTestManager.getTest().log(Status.INFO, "CustomerInfo 03: Update First Name");
@@ -357,7 +364,7 @@ public class Register_Login_MyAccount_TestCase extends BaseTest {
 	public void TC14_Addresses(Method method) {
 		ExtentTestManager.startTest(method.getName(), "TC14_Addresses");
 		ExtentTestManager.getTest().log(Status.INFO, "Address 01: Open My account -Address");
-		addressesPageObject = customerInfoPage.clickAddressesLink();
+		addressesPageObject = (UserAddressesPageObject) customerInfoPage.openPageAtMyAccountPageByName(driver, "Addresses");
 		ExtentTestManager.getTest().log(Status.INFO, "Address 02: Click Button Add New Address");
 		addressesPageObject.clickButtonAddNew();
 		ExtentTestManager.getTest().log(Status.INFO, "Address 03: Input FirstName New Address");
@@ -427,8 +434,29 @@ public class Register_Login_MyAccount_TestCase extends BaseTest {
 	}
 	
 	@Test
-	public void TC16_(Method method) {
-		
+	public void TC16_My_Product_Review(Method method) {
+		ExtentTestManager.startTest(method.getName(), "TC16_My_Product_Review");
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 01: Open Product Page Computer");
+		productPage = homePage.clickSubMenuByName(driver,"Computers ","Desktops ");
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 02: Click Product - Open Product etail");
+		productDetailPage = productPage.clickProductByName("Build your own computer");
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 03: Click Review - Open Review Page");
+		productReviewPage = productDetailPage.clickAddYourReview();
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 04: Input review Title");
+		productReviewPage.inputToTextboxByID(driver, "AddProductReview_Title", UserData.ReviewProduct.TITLE);
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 05: Input review Text");
+		productReviewPage.inputToTextareaReview(UserData.ReviewProduct.REVIEW_TEXT);
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 06: Check Radio Rating");
+		productReviewPage.checkToRadioCheckBoxById(driver, "addproductrating_5");
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 07: Click Button Submit Review");
+		productReviewPage.clickSubmitReview();
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 08: Click My Account");
+		customerInfoPage = productReviewPage.clickMyAccountLink(driver);
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 09: Click My Product Review");
+		myProductReviewPage = (UserMyproductReviewPageObject) customerInfoPage.openPageAtMyAccountPageByName(driver, "My product reviews");
+		ExtentTestManager.getTest().log(Status.INFO, "My Product Review 10: Verify Informaiton review");
+		Assert.assertEquals(myProductReviewPage.getTextReviewTitle(), UserData.ReviewProduct.TITLE);
+		Assert.assertEquals(myProductReviewPage.getTextReviewText(), UserData.ReviewProduct.REVIEW_TEXT);
 	}
 
 	@AfterClass(alwaysRun = true)

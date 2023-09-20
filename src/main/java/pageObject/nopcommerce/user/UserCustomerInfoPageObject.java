@@ -13,11 +13,7 @@ public class UserCustomerInfoPageObject extends BasePage {
 		this.driver = driver;
 	}
 
-	public UserAddressesPageObject clickAddressesLink() {
-		waitForElementVisible(driver, CustomerInfoPageUI.ADDRESSES_LINK);
-		clickToElement(driver, CustomerInfoPageUI.ADDRESSES_LINK);
-		return PageGeneratorManager.getUserAddressesPage(driver);
-	}
+
 	
 	
 	

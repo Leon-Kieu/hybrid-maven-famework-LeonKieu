@@ -22,9 +22,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pageObject.nopcommerce.user.UserAddressesPageObject;
 import pageObject.nopcommerce.user.UserChangePasswordPageObject;
+import pageObject.nopcommerce.user.UserCustomerInfoPageObject;
+import pageObject.nopcommerce.user.UserProductPageObject;
 import pageUI.nopcommerce.user.AddressesPageUI;
 import pageUI.nopcommerce.user.BasePageUserUI;
 import pageUI.nopcommerce.user.CustomerInfoPageUI;
+import pageUI.nopcommerce.user.HomePageUserUI;
 
 
 
@@ -380,6 +383,11 @@ public class BasePage {
 		Actions action = new Actions(driver);
 		action.moveToElement(getWebElement(driver, locatorType)).perform();
 	}
+	
+	protected void hoverMouseToElement(WebDriver driver, String locatorType, String... dynamicValues) {
+		Actions action = new Actions(driver);
+		action.moveToElement(getWebElement(driver, getDynamicXpath(locatorType, dynamicValues))).perform();
+	}
 	//Ham click phim
 	protected void pressKeyToElement(WebDriver driver, String locatorType, Keys key) {
 		Actions action = new Actions(driver);
@@ -598,8 +606,35 @@ public class BasePage {
 		return isElementSelected(driver,BasePageUserUI.DYNAMIC_RADIO_CHECKBOX_BY_ID, RadioID);
 	}
 	
-
+	//Ham Dynamic click subMenu
+	public UserProductPageObject clickSubMenuByName(WebDriver driver,String TopMenuName, String SubMenuName) {
+		waitForElementClickable(driver, BasePageUserUI.DYNAMIC_TOPMENU_LINK_BY_NAME, TopMenuName);
+		hoverMouseToElement(driver, BasePageUserUI.DYNAMIC_TOPMENU_LINK_BY_NAME, TopMenuName);
+		waitForElementVisible(driver, BasePageUserUI.DYNAMIC_SUBMENU_LINK_BY_NAME, TopMenuName, SubMenuName);
+		clickToElement(driver, BasePageUserUI.DYNAMIC_SUBMENU_LINK_BY_NAME, TopMenuName,SubMenuName);
+		return PageGeneratorManager.getUserProductPage(driver);
+	}
 	
-	
+	//Cac ham click Menu Header
+	public UserCustomerInfoPageObject clickMyAccountLink(WebDriver driver) {
+		waitForElementClickable(driver, HomePageUserUI.MY_ACCOUNT_LINK);
+		clickToElement(driver, HomePageUserUI.MY_ACCOUNT_LINK);
+		return PageGeneratorManager.getUserCustomerInfoPage(driver);
+	}
+	//Ham Dynamic chuyen Page
+	public BasePage openPageAtMyAccountPageByName(WebDriver driver, String pageName) {
+		waitForElementVisible(driver, BasePageUserUI.DYNAMIC_MY_ACCOUNT_PAGE,pageName);
+		clickToElement(driver, BasePageUserUI.DYNAMIC_MY_ACCOUNT_PAGE, pageName);
+		switch (pageName) {
+		case "Customer info":
+			return PageGeneratorManager.getUserCustomerInfoPage(driver);
+		case "Addresses":
+			return PageGeneratorManager.getUserAddressesPage(driver);
+		case "My product reviews":
+			return PageGeneratorManager.getUserMyProductReviewPage(driver);
+		default:
+			throw new RuntimeException("Invalid Page Name at My Account Page");
+		}
+	}
 	
 }

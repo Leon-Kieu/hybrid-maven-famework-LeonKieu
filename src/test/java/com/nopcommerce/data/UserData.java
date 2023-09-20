@@ -34,4 +34,12 @@ public class UserData {
 
 	}
 	
+	public static class ReviewProduct {
+
+		public static final String TITLE = "Review Example";
+		public static final String REVIEW_TEXT = "Very godd";
+
+	}
+	
+	
 }
