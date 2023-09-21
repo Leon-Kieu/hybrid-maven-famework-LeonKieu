@@ -59,7 +59,7 @@ public class Register_Login_MyAccount_TestCase extends BaseTest {
 		//Register data
 		firstName = UserData.Register.FIRST_NAME;
 		lastName = UserData.Register.LAST_NAME;
-		emailAddress = UserData.Register.EMAIL + generateFakeNumber() + "@gmail.vn";
+		emailAddress = UserData.Register.EMAIL;
 		invalidEmail = UserData.Register.INVALIDEMAIL;
 		password = UserData.Register.PASSWORD;
 		invalidPass = UserData.Register.INVALID_PASSWORD;

@@ -12,6 +12,7 @@ import pageObject.nopcommerce.user.UserProductDetailPageObject;
 import pageObject.nopcommerce.user.UserProductPageObject;
 import pageObject.nopcommerce.user.UserProductReviewPageObject;
 import pageObject.nopcommerce.user.UserRegisterPageObject;
+import pageObject.nopcommerce.user.UserSearchPageObject;
 
 
 
@@ -59,5 +60,8 @@ public class PageGeneratorManager {
 		return new UserProductReviewPageObject(driver);
 	}
 	
+	public static UserSearchPageObject getUserSearchPage(WebDriver driver) {
+		return new UserSearchPageObject(driver);
+	}
 
 }

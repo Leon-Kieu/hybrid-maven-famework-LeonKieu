@@ -615,6 +615,9 @@ public class BasePage {
 		return PageGeneratorManager.getUserProductPage(driver);
 	}
 	
+
+	
+	
 	//Cac ham click Menu Header
 	public UserCustomerInfoPageObject clickMyAccountLink(WebDriver driver) {
 		waitForElementClickable(driver, HomePageUserUI.MY_ACCOUNT_LINK);
@@ -632,6 +635,18 @@ public class BasePage {
 			return PageGeneratorManager.getUserAddressesPage(driver);
 		case "My product reviews":
 			return PageGeneratorManager.getUserMyProductReviewPage(driver);
+		default:
+			throw new RuntimeException("Invalid Page Name at My Account Page");
+		}
+	}
+	//Ham Dynamic click footer Menu
+	public BasePage openPageAtFooterByName(WebDriver driver, String pageName) {
+		waitForElementVisible(driver, BasePageUserUI.DYNAMIC_FOOTER_LINK_BY_NAME,pageName);
+		clickToElement(driver, BasePageUserUI.DYNAMIC_FOOTER_LINK_BY_NAME, pageName);
+		switch (pageName) {
+		case "Search":
+			return PageGeneratorManager.getUserSearchPage(driver);
+
 		default:
 			throw new RuntimeException("Invalid Page Name at My Account Page");
 		}

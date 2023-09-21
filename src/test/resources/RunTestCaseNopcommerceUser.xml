@@ -15,7 +15,7 @@
   <test name="Run Test Case On Chrome">
   <parameter name="browser" value="chrome" />
     <classes>
-      <class name="com.nopcommerce.user.Register_Login_MyAccount_TestCase"/>
+      <class name="com.nopcommerce.user.Sort_Data_TesstCase"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

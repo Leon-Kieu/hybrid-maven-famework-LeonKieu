@@ -5,7 +5,7 @@ public class UserData {
 
 		public static final String FIRST_NAME = "Anh";
 		public static final String LAST_NAME = "IT";
-		public static final String EMAIL = "AnhIT";
+		public static final String EMAIL = "AnhIT2022@gmail.com";
 		public static final String INVALIDEMAIL = "AnhIT#$.gmail.com";
 		public static final String PASSWORD = "123456";
 		public static final String INVALID_PASSWORD = "123";
