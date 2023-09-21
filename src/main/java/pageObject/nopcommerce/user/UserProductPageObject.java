@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import commons.BasePage;
 import commons.PageGeneratorManager;
 import pageUI.nopcommerce.user.ProductPageUI;
+import pageUI.nopcommerce.user.SearchPageUI;
 
 public class UserProductPageObject extends BasePage{
 	private WebDriver driver;
@@ -82,4 +83,30 @@ public class UserProductPageObject extends BasePage{
 		return productSortList.equals(productUIlist);
 	};
 	
+	public int getSizeListProductDisplay() {
+		waitForElementVisible(driver, ProductPageUI.PRODUCT_LIST);
+		sleepInsecond(3);
+		return getElementSize(driver, ProductPageUI.PRODUCT_LIST);
+	}
+	
+	public void clickNextButton() {
+		waitForElementClickable(driver, ProductPageUI.NEXT_ICON);
+		clickToElement(driver, ProductPageUI.NEXT_ICON);
+	}
+
+	public boolean isNextIconDisplay() {
+		waitForElementVisible(driver, ProductPageUI.NEXT_ICON);
+		return isElementisDisplayed(driver, ProductPageUI.NEXT_ICON);
+	}
+
+	public boolean isPreviousIconDisplay() {
+		waitForElementVisible(driver, ProductPageUI.PREVIOUS_ICON);
+		return isElementisDisplayed(driver, ProductPageUI.PREVIOUS_ICON);
+	}
+	public boolean isNextIconUnDisplay() {
+		return isElementUndisplayed(driver, ProductPageUI.NEXT_ICON);
+	}
+	public boolean isPreviousIconUnDisplay() {
+		return isElementUndisplayed(driver, ProductPageUI.PREVIOUS_ICON);
+	}
 }

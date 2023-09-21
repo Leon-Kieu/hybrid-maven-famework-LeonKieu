@@ -331,9 +331,9 @@ public class BasePage {
 	}
 	//Hàm check element UnDisplayed
 	public boolean isElementUndisplayed(WebDriver driver, String locatorType) {
-		overrideGlobalTimeout(driver, longTimeout);
-		List<WebElement> elements = getListWebElement(driver, locatorType);
 		overrideGlobalTimeout(driver, shortTimeout);
+		List<WebElement> elements = getListWebElement(driver, locatorType);
+		overrideGlobalTimeout(driver, longTimeout);
 		if (elements.size() == 0) {
 			//System.out.println("Element not in DOM");
 			return true;
@@ -520,7 +520,7 @@ public class BasePage {
 	}
 	
 	protected void waitForAllElementInVisible(WebDriver driver, String locatorType) {
-		 WebDriverWait	explicitWait = new WebDriverWait(driver, longTimeout);
+		 WebDriverWait	explicitWait = new WebDriverWait(driver, shortTimeout);
 		 explicitWait.until(ExpectedConditions.invisibilityOfAllElements(getListWebElement(driver, locatorType)));
 	}
 	protected void waitForAllElementInVisible(WebDriver driver, String locatorType, String... dynamicValues) {
