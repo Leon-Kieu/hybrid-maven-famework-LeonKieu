@@ -646,7 +646,10 @@ public class BasePage {
 		switch (pageName) {
 		case "Search":
 			return PageGeneratorManager.getUserSearchPage(driver);
-
+		case "Compare products list":
+			return PageGeneratorManager.getUserComparePage(driver);
+		case "Recently viewed products":
+			return PageGeneratorManager.getUserRecentlyPage(driver);
 		default:
 			throw new RuntimeException("Invalid Page Name at My Account Page");
 		}

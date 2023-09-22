@@ -1,11 +1,15 @@
 package com.nopcommerce.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class UserData {
 	public static class Register {
 
 		public static final String FIRST_NAME = "Anh";
 		public static final String LAST_NAME = "IT";
-		public static final String EMAIL = "AnhIT2022@gmail.com";
+		public static final String EMAIL = "AnhIT2023@gmail.com";
 		public static final String INVALIDEMAIL = "AnhIT#$.gmail.com";
 		public static final String PASSWORD = "123456";
 		public static final String INVALID_PASSWORD = "123";
@@ -38,6 +42,12 @@ public class UserData {
 
 		public static final String TITLE = "Review Example";
 		public static final String REVIEW_TEXT = "Very godd";
+
+	}
+	public static class Product {
+
+		public static final String[] PRODUCTNAME = {"Apple MacBook Pro 13-inch","Asus N551JK-XO076H Laptop","HP Envy 6-1180ca 15.6-Inch Sleekbook"
+				,"HP Spectre XT Pro UltraBook","Lenovo Thinkpad X1 Carbon Laptop","Samsung Series 9 NP900X4C Premium Ultrabook"};
 
 	}
 	

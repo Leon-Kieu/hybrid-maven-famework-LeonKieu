@@ -19,5 +19,11 @@ public class UserProductDetailPageObject extends BasePage{
 		clickToElement(driver, ProductDetailPageUI.ADD_YOUR_REVIEW_LINK);
 		return PageGeneratorManager.getUserProductReviewPage(driver);
 	}
+
+	public UserWishlistOageObject clickWishlistLink() {
+		waitForElementClickable(driver, ProductDetailPageUI.WISHLIST_LINK);
+		clickToElementByJS(driver, ProductDetailPageUI.WISHLIST_LINK);
+		return PageGeneratorManager.getUserWishlistPage(driver);
+	}
 	
 }

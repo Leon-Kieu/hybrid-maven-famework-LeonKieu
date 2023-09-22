@@ -28,7 +28,6 @@ public class Sort_Display_Paging_Data_TesstCase extends BaseTest {
 	Environment environment;
 
 	private String email, password;
-	private Register_Login_MyAccount_TestCase Pre_condition;
 
 	private UserHomePageObject homePage;
 	private UserRegisterPageObject registerPage;

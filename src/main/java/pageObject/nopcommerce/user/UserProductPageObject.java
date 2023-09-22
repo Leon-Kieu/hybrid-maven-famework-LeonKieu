@@ -109,4 +109,26 @@ public class UserProductPageObject extends BasePage{
 	public boolean isPreviousIconUnDisplay() {
 		return isElementUndisplayed(driver, ProductPageUI.PREVIOUS_ICON);
 	}
+
+	public String getTextMessageBar() {
+		waitForElementVisible(driver, ProductPageUI.BAR_MESSAGE);
+		return getElementText(driver, ProductPageUI.BAR_MESSAGE);
+	}
+
+	public void clickCompareProductByName(String ProductName) {
+		waitForElementClickable(driver, ProductPageUI.DYNAMIC_BUTTON_COMPARE_BY_NAME, ProductName);
+		clickToElement(driver, ProductPageUI.DYNAMIC_BUTTON_COMPARE_BY_NAME, ProductName);
+		sleepInsecond(2);
+	}
+
+	public void clickLinkProduct(String[] productname) {
+		for (String name : productname) {
+			clickToElement(driver, ProductPageUI.DYNAMIC_LINK_PRODUCT_BY_NAME, name);
+			sleepInsecond(1);
+			backToPage(driver);
+		}
+		
+	}
+
+
 }
