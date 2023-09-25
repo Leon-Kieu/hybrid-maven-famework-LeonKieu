@@ -77,4 +77,17 @@ public class UserData {
 		public static final String PRICE_EDIT = "";
 	}
 	
+	public static class CARD {
+
+		public static final String OPTION = "VISA";
+		public static final String NUMBER = "4624822528991941";
+		public static final String NAME = "Tsukika Rocha";
+		public static final String DATE = "09";
+		public static final String YEAR = "2026";
+		public static final String PIN  = "1397";
+		public static final String CVV_CVC  = "412";
+
+	}
+	
+	
 }

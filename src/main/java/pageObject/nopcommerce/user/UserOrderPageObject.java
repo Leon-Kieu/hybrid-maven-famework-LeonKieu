@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import commons.PageGeneratorManager;
 import pageUI.nopcommerce.user.OrderPageUI;
 
 public class UserOrderPageObject extends BasePage{
@@ -27,6 +28,12 @@ public class UserOrderPageObject extends BasePage{
 	public String getOrderNumberWeb(String OrderNumber) {
 		waitForElementVisible(driver,OrderPageUI.DYNAMIC_ORDER_NUMBER, OrderNumber);
 		return getElementText(driver,OrderPageUI.DYNAMIC_ORDER_NUMBER, OrderNumber);
+	}
+
+	public UserOrderDetailPageObject clickDetailPageByOrder(String orderNumberfile) {
+		waitForElementClickable(driver,OrderPageUI.DYNAMIC_ORDER_DETAIL, orderNumberfile);
+		clickToElement(driver, OrderPageUI.DYNAMIC_ORDER_DETAIL, orderNumberfile);
+		return PageGeneratorManager.getUserOrderDetailPage(driver);
 	}
 
 
