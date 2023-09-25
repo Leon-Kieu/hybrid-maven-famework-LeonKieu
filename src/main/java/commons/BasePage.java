@@ -556,7 +556,7 @@ public class BasePage {
 	//======================================================================//
 	//Hàm Dynamic textbox send key
 	public void inputToTextboxByID(WebDriver driver, String textBoxID, String textValue) {
-		waitForAllElementVisible(driver, BasePageUserUI.DYNAMIC_TEXTBOX_BY_ID, textBoxID);
+		waitForElementVisible(driver, BasePageUserUI.DYNAMIC_TEXTBOX_BY_ID, textBoxID);
 		sendkeyToElement(driver, BasePageUserUI.DYNAMIC_TEXTBOX_BY_ID, textValue, textBoxID);	
 	}
 	//Hàm Dynamic dropdow 
@@ -568,6 +568,10 @@ public class BasePage {
 	public void checkToRadioCheckBoxById(WebDriver driver, String RadioID) {
 		waitForElementClickable(driver, BasePageUserUI.DYNAMIC_RADIO_CHECKBOX_BY_ID, RadioID);
 		checkToDefaultCheckboxRadio(driver, BasePageUserUI.DYNAMIC_RADIO_CHECKBOX_BY_ID, RadioID);
+	}
+	public void UncheckToRadioCheckBoxById(WebDriver driver, String RadioID) {
+		waitForElementClickable(driver, BasePageUserUI.DYNAMIC_RADIO_CHECKBOX_BY_ID, RadioID);
+		UncheckToDefaultCheckbox(driver, BasePageUserUI.DYNAMIC_RADIO_CHECKBOX_BY_ID, RadioID);
 	}
 	//Hàm Dynamic click button
 	public void clickToButtonByID(WebDriver driver, String IdButton) {
@@ -608,7 +612,7 @@ public class BasePage {
 	
 	//Ham Dynamic click subMenu
 	public UserProductPageObject clickSubMenuByName(WebDriver driver,String TopMenuName, String SubMenuName) {
-		waitForElementClickable(driver, BasePageUserUI.DYNAMIC_TOPMENU_LINK_BY_NAME, TopMenuName);
+		waitForElementVisible(driver, BasePageUserUI.DYNAMIC_TOPMENU_LINK_BY_NAME, TopMenuName);
 		hoverMouseToElement(driver, BasePageUserUI.DYNAMIC_TOPMENU_LINK_BY_NAME, TopMenuName);
 		waitForElementVisible(driver, BasePageUserUI.DYNAMIC_SUBMENU_LINK_BY_NAME, TopMenuName, SubMenuName);
 		clickToElement(driver, BasePageUserUI.DYNAMIC_SUBMENU_LINK_BY_NAME, TopMenuName,SubMenuName);
@@ -635,6 +639,8 @@ public class BasePage {
 			return PageGeneratorManager.getUserAddressesPage(driver);
 		case "My product reviews":
 			return PageGeneratorManager.getUserMyProductReviewPage(driver);
+		case "Orders":
+			return PageGeneratorManager.getUserOrderPage(driver);
 		default:
 			throw new RuntimeException("Invalid Page Name at My Account Page");
 		}
@@ -654,5 +660,6 @@ public class BasePage {
 			throw new RuntimeException("Invalid Page Name at My Account Page");
 		}
 	}
+
 	
 }

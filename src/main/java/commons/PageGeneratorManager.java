@@ -9,6 +9,7 @@ import pageObject.nopcommerce.user.UserCustomerInfoPageObject;
 import pageObject.nopcommerce.user.UserHomePageObject;
 import pageObject.nopcommerce.user.UserLoginPageObject;
 import pageObject.nopcommerce.user.UserMyproductReviewPageObject;
+import pageObject.nopcommerce.user.UserOrderPageObject;
 import pageObject.nopcommerce.user.UserProductDetailPageObject;
 import pageObject.nopcommerce.user.UserProductPageObject;
 import pageObject.nopcommerce.user.UserProductReviewPageObject;
@@ -82,5 +83,8 @@ public class PageGeneratorManager {
 	
 	public static UserRecentlyPageObject getUserRecentlyPage(WebDriver driver) {
 		return new UserRecentlyPageObject(driver);
+	}
+	public static UserOrderPageObject getUserOrderPage(WebDriver driver) {
+		return new UserOrderPageObject(driver);
 	}
 }

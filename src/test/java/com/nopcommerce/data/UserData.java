@@ -9,7 +9,7 @@ public class UserData {
 
 		public static final String FIRST_NAME = "Anh";
 		public static final String LAST_NAME = "IT";
-		public static final String EMAIL = "AnhIT2023@gmail.com";
+		public static final String EMAIL = "AnhIT2022@gmail.com";
 		public static final String INVALIDEMAIL = "AnhIT#$.gmail.com";
 		public static final String PASSWORD = "123456";
 		public static final String INVALID_PASSWORD = "123";
@@ -51,5 +51,30 @@ public class UserData {
 
 	}
 	
+	public static class Order_Product {
+
+		public static final String Processor = "2.2 GHz Intel Pentium Dual-Core E2200";
+		public static final String RAM = "8GB [+$60.00]";
+		public static final String QUANITY = "2";
+		public static final String HDD = "400 GB [+$100.00]";
+		public static final String OS = "Vista Home [+$50.00]";
+		public static final String Software  = "Acrobat Reader [+$10.00]";
+		public static final String Software_edit  = "Microsoft Office [+$50.00]";
+		public static final String PRICE = "$1,420.00";
+		public static final String PRICE_EDIT = "$2,920.00";
+	}
+	
+	public static class Shiping_Address {
+
+		public static final String Country = "Viet Nam";
+		public static final String ZIP_POSTAL_CODE = "00700";
+		public static final String QUANITY = "";
+		public static final String HDD = "";
+		public static final String OS = "";
+		public static final String Software  = "";
+		public static final String Software_edit  = "]";
+		public static final String PRICE = "";
+		public static final String PRICE_EDIT = "";
+	}
 	
 }
