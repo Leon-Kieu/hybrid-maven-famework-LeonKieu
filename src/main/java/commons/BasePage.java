@@ -24,6 +24,7 @@ import pageObject.nopcommerce.user.UserAddressesPageObject;
 import pageObject.nopcommerce.user.UserChangePasswordPageObject;
 import pageObject.nopcommerce.user.UserCustomerInfoPageObject;
 import pageObject.nopcommerce.user.UserProductPageObject;
+import pageUI.nopcommerce.admin.BasePageAdminUI;
 import pageUI.nopcommerce.user.AddressesPageUI;
 import pageUI.nopcommerce.user.BasePageUserUI;
 import pageUI.nopcommerce.user.CustomerInfoPageUI;
@@ -559,6 +560,7 @@ public class BasePage {
 		waitForElementVisible(driver, BasePageUserUI.DYNAMIC_TEXTBOX_BY_ID, textBoxID);
 		sendkeyToElement(driver, BasePageUserUI.DYNAMIC_TEXTBOX_BY_ID, textValue, textBoxID);	
 	}
+	
 	//Hàm Dynamic dropdow 
 	public void selectDropdownByName(WebDriver driver, String DropdownName, String value) {
 		waitForElementClickable(driver, BasePageUserUI.DYNAMMIC_DROPDOW_BY_NAME, DropdownName);
@@ -660,6 +662,26 @@ public class BasePage {
 			throw new RuntimeException("Invalid Page Name at My Account Page");
 		}
 	}
-
+	
+	//Ham Dynamic Click Menu Admin Page
+	public void clickMenuAdminByName(WebDriver driver, String MenuName) {
+		waitForElementClickable(driver, BasePageAdminUI.DYNAMIC_MENU_ITEM_BY_NAME, MenuName);
+		sleepInsecond(1);
+		clickToElement(driver, BasePageAdminUI.DYNAMIC_MENU_ITEM_BY_NAME, MenuName);
+	}
+	
+	//Ham Dynamic Open Page By Menu Name anh SubMenu Name
+	public BasePage openAdminPageAtMenuNameAndSubMenuName(WebDriver driver, String MenuName, String SubMenuName) {
+		waitForElementClickable(driver, BasePageAdminUI.DYNAMIC_SUB_MENU_ITEM_BY_NAME, MenuName, SubMenuName);
+		sleepInsecond(1);
+		clickToElement(driver, BasePageAdminUI.DYNAMIC_SUB_MENU_ITEM_BY_NAME, MenuName, SubMenuName);
+		switch (SubMenuName) {
+		case "Products":
+			return PageGeneratorManager.getAdminCatalogProductPage(driver);
+		default:
+			throw new RuntimeException("Invalid Page Name at My Account Page");
+		}
+	}
+	
 	
 }

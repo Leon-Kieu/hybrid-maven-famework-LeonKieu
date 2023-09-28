@@ -9,18 +9,12 @@ public interface Environment extends Config{
 	@Key("App.url")
 	String appUrl();
 	
-	@Key("App.User")
-	String userName();
+	@Key("Admin.url")
+	String adminUrl();
 	
-	@Key("App.Pass")
-	String password();
+	@Key("admin.user")
+	String adminUser();
 	
-	@Key("DB.host")
-	String dbhost();
-	
-	@Key("DB.User")
-	String dbuser();
-	
-	@Key("DB.Pass")
-	String dbpass();
+	@Key("admin.pass")
+	String adminPass();
 }
